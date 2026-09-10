@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Kayseri'de web sitesi tasarımı ve yazılım. İşinize göre kurulan, hızlı açılan, Google'da bulunan siteler.">
+<meta name="theme-color" content="#0E4B4E">
+<meta property="og:title" content="Kavis — Kayseri web sitesi tasarımı">
+<meta property="og:description" content="İki gerçek referans, iki bambaşka iş. Şablon değil, işinize göre kurulan siteler.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 26 26%22%3E%3Cpath d=%22M3 22.5C3 11.2 11.7 2.5 23 2.5%22 stroke=%22%230E4B4E%22 stroke-width=%223.2%22 stroke-linecap=%22round%22 fill=%22none%22/%3E%3C/svg%3E">
+<title>Kavis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+
+</head>
+<body>
+<style>
+/* ============================================================
+   KAVİS — tek kişilik web stüdyosu, Kayseri
+   Kabuk bilinçli olarak sessiz: doygun renk yalnızca iki proje
+   bloğunda çıkıyor. Portfolyo yeteneği anlatmıyor, gösteriyor.
+   ============================================================ */
+
+:root {
+  /* Zemin: krem değil — hafif yeşile çalan kırık beyaz */
+  --zemin:      #F2F3F0;
+  --zemin-2:    #E9EBE6;
+  --yuzey:      #FFFFFF;
+  --murekkep:   #14181B;
+  --murekkep-2: #3E464B;
+  --soluk:      #6A7178;
+  --cizgi:      #DFE2DC;
+  --cizgi-2:    #C9CDC5;
+
+  /* Kavis'in kendi rengi: derin petrol. Her iki projenin
+     paletinden de uzak, o yüzden onlarla yarışmıyor. */
+  --vurgu:      #0E4B4E;
+  --vurgu-acik: #17706F;
+  --vurgu-zemin:#DCE9E7;
+
+  /* Projelerin kendi renkleri — yalnızca kendi bloklarında */
+  --ex-zemin:   #0A0F1E;
+  --ex-kart:    #131B30;
+  --ex-mavi:    #2F6EDB;
+  --ex-turkuaz: #1FA98F;
+  --ex-pembe:   #FF6B8A;
+  --ex-ink:     #F2F4FA;
+  --ex-soluk:   #97A1B8;
+
+  --bb-zemin:   #F8F6F1;
+  --bb-yuzey:   #FFFFFF;
+  --bb-yesil:   #2F5D50;
+  --bb-kil:     #C0714E;
+  --bb-ink:     #2B2724;
+  --bb-soluk:   #857B72;
+  --bb-cizgi:   #E2DACE;
+
+  --f-baslik: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
+  --f-govde:  "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:   "JetBrains Mono", ui-monospace, "Cascadia Mono", monospace;
+
+  --en: 1080px;
+  --r:  14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --zemin:      #101315;
+    --zemin-2:    #171B1E;
+    --yuzey:      #191D20;
+    --murekkep:   #E8EAE6;
+    --murekkep-2: #B3B9B5;
+    --soluk:      #868D89;
+    --cizgi:      #262B2E;
+    --cizgi-2:    #343A3D;
+    --vurgu:      #5FB6AE;
+    --vurgu-acik: #7FCFC6;
+    --vurgu-zemin:#14312F;
+  }
+}
+:root[data-theme="dark"] {
+  --zemin:      #101315;
+  --zemin-2:    #171B1E;
+  --yuzey:      #191D20;
+  --murekkep:   #E8EAE6;
+  --murekkep-2: #B3B9B5;
+  --soluk:      #868D89;
+  --cizgi:      #262B2E;
+  --cizgi-2:    #343A3D;
+  --vurgu:      #5FB6AE;
+  --vurgu-acik: #7FCFC6;
+  --vurgu-zemin:#14312F;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--zemin);
+  color: var(--murekkep);
+  font-family: var(--f-govde);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+img, svg { max-width: 100%; }
+
+.sarmal { width: 100%; max-width: var(--en); margin: 0 auto; padding: 0 24px; }
+
+h1, h2, h3 {
+  font-family: var(--f-baslik);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+.etiket {
+  font-family: var(--f-mono);
+  font-size: .74rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--soluk);
+}
+
+/* ---------- Üst çubuk ---------- */
+.ust {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--zemin) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--cizgi);
+}
+.ust-ic { display: flex; align-items: center; gap: 16px; height: 66px; }
+.marka { display: flex; align-items: center; gap: 11px; text-decoration: none; font-family: var(--f-baslik); font-weight: 700; font-size: 1.22rem; letter-spacing: -.03em; }
+.marka svg { display: block; }
+.ust-bosluk { flex: 1; }
+.ust a.metin-bag { text-decoration: none; color: var(--murekkep-2); font-size: .95rem; }
+.ust a.metin-bag:hover { color: var(--vurgu); }
+
+.dugme {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: var(--vurgu); color: #FFFFFF;
+  padding: 11px 20px; border-radius: 999px;
+  text-decoration: none; font-weight: 600; font-size: .95rem;
+  border: 1px solid transparent;
+  transition: transform .16s, background .16s;
+}
+.dugme:hover { background: var(--vurgu-acik); transform: translateY(-1px); }
+:root[data-theme="dark"] .dugme,
+:root:not([data-theme="light"]) .dugme { color: #0B0F10; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .dugme { color: #FFFFFF; } }
+
+.dugme--cizgi {
+  background: transparent; color: var(--murekkep);
+  border-color: var(--cizgi-2);
+}
+.dugme--cizgi:hover { background: var(--yuzey); border-color: var(--vurgu); color: var(--vurgu); }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; padding: 74px 0 64px; overflow: hidden; }
+.hero-yay {
+  position: absolute; right: -180px; top: -120px;
+  width: 640px; height: 640px; pointer-events: none; opacity: .5;
+}
+.hero-ic { position: relative; max-width: 760px; }
+.hero h1 {
+  font-size: clamp(2.5rem, 1.4rem + 4.6vw, 4.4rem);
+  line-height: 1.02;
+  margin: 18px 0 0;
+}
+.hero h1 em { font-style: normal; color: var(--vurgu); }
+.hero-alt {
+  font-size: clamp(1.05rem, .96rem + .4vw, 1.25rem);
+  color: var(--murekkep-2);
+  max-width: 58ch;
+  margin: 22px 0 0;
+}
+.hero-btn { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+/* ---------- Ölçülen gerçekler ---------- */
+.olcum {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px; background: var(--cizgi);
+  border: 1px solid var(--cizgi); border-radius: var(--r);
+  overflow: hidden; margin-top: 52px;
+}
+.olcum div { background: var(--zemin); padding: 20px 22px; }
+.olcum b {
+  display: block; font-family: var(--f-baslik); font-weight: 700;
+  font-size: 1.7rem; letter-spacing: -.03em; line-height: 1.1;
+  font-variant-numeric: tabular-nums; color: var(--murekkep);
+}
+.olcum span { display: block; font-size: .88rem; color: var(--soluk); margin-top: 5px; }
+
+/* ---------- Bölüm başlığı ---------- */
+.bolum { padding: 70px 0; }
+.bolum-bas { max-width: 60ch; margin-bottom: 34px; }
+.bolum-bas h2 { font-size: clamp(1.7rem, 1.3rem + 1.5vw, 2.5rem); margin-top: 10px; }
+.bolum-bas p { color: var(--murekkep-2); margin: 12px 0 0; }
+
+/* ---------- Vaka çalışmaları ---------- */
+.vaka { padding: 54px 0; }
+.vaka-ic { display: grid; gap: 34px; align-items: center; }
+@media (min-width: 900px) { .vaka-ic { grid-template-columns: 1fr 1fr; gap: 52px; } }
+
+.vaka-yazi h3 { font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.2rem); margin: 12px 0 0; }
+.vaka-yazi p { margin: 14px 0 0; }
+.vaka-liste { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 10px; }
+.vaka-liste li { display: flex; gap: 11px; align-items: flex-start; font-size: .96rem; }
+.vaka-liste svg { flex: none; margin-top: 5px; }
+.vaka-bag { display: inline-flex; align-items: center; gap: 8px; margin-top: 26px; font-weight: 600; text-decoration: none; }
+.vaka-bag:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* EntryX bloğu — gece */
+.vaka--ex { background: var(--ex-zemin); color: var(--ex-ink); }
+.vaka--ex .etiket { color: var(--ex-turkuaz); }
+.vaka--ex p { color: var(--ex-soluk); }
+.vaka--ex .vaka-liste li { color: var(--ex-ink); }
+.vaka--ex .vaka-bag { color: var(--ex-pembe); }
+
+/* Buse bloğu — gündüz */
+.vaka--bb { background: var(--bb-zemin); color: var(--bb-ink); }
+.vaka--bb .etiket { color: var(--bb-kil); }
+.vaka--bb p { color: var(--bb-soluk); }
+.vaka--bb .vaka-liste li { color: var(--bb-ink); }
+.vaka--bb .vaka-bag { color: var(--bb-yesil); }
+
+/* Tarayıcı penceresi taklidi — her proje kendi rengiyle */
+.pencere { border-radius: 12px; overflow: hidden; box-shadow: 0 18px 48px rgba(0,0,0,.22); }
+.pencere-bar { display: flex; align-items: center; gap: 6px; padding: 9px 12px; }
+.pencere-bar i { width: 9px; height: 9px; border-radius: 50%; display: block; }
+.pencere-adres { flex: 1; margin-left: 8px; font-family: var(--f-mono); font-size: .68rem; padding: 3px 9px; border-radius: 5px; overflow: hidden; white-space: nowrap; }
+.pencere-govde { padding: 22px; min-height: 210px; }
+
+/* EntryX önizleme */
+.on-ex .pencere-bar { background: var(--ex-kart); }
+.on-ex .pencere-bar i:nth-child(1) { background: var(--ex-pembe); }
+.on-ex .pencere-bar i:nth-child(2) { background: #F5C76B; }
+.on-ex .pencere-bar i:nth-child(3) { background: var(--ex-turkuaz); }
+.on-ex .pencere-adres { background: #0B111C; color: var(--ex-soluk); }
+.on-ex .pencere-govde { background: var(--ex-zemin); }
+.on-ex .ex-baslik { font-family: var(--f-baslik); font-weight: 700; font-size: 1.4rem; color: var(--ex-ink); letter-spacing: -.02em; }
+.on-ex .ex-alt { color: var(--ex-soluk); font-size: .84rem; margin-top: 4px; }
+.on-ex .ex-satir { display: flex; gap: 9px; margin-top: 16px; flex-wrap: wrap; }
+.on-ex .ex-rozet { font-size: .72rem; padding: 5px 11px; border-radius: 999px; border: 1px solid #1D2434; color: var(--ex-soluk); }
+.on-ex .ex-rozet--aktif { background: var(--ex-mavi); border-color: var(--ex-mavi); color: #FFFFFF; }
+.on-ex .ex-kartlar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+.on-ex .ex-kart { background: var(--ex-kart); border: 1px solid #1D2434; border-radius: 9px; padding: 12px; }
+.on-ex .ex-kart b { display: block; color: var(--ex-ink); font-size: .84rem; }
+.on-ex .ex-kart span { display: block; color: var(--ex-turkuaz); font-size: .72rem; font-family: var(--f-mono); margin-top: 5px; }
+
+/* Buse önizleme */
+.on-bb .pencere-bar { background: var(--bb-zemin); border-bottom: 1px solid var(--bb-cizgi); }
+.on-bb .pencere-bar i { background: var(--bb-cizgi); }
+.on-bb .pencere-adres { background: var(--bb-yuzey); color: var(--bb-soluk); border: 1px solid var(--bb-cizgi); }
+.on-bb .pencere-govde { background: var(--bb-yuzey); }
+.on-bb .bb-etiket { display: inline-block; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--bb-yesil); background: #E4EDE9; padding: 5px 11px; border-radius: 999px; }
+.on-bb .bb-baslik { font-family: Georgia, "Times New Roman", serif; font-size: 1.5rem; line-height: 1.2; color: var(--bb-ink); margin-top: 13px; }
+.on-bb .bb-baslik i { font-style: italic; color: var(--bb-yesil); }
+.on-bb .bb-metin { color: var(--bb-soluk); font-size: .84rem; margin-top: 10px; }
+.on-bb .bb-satir { display: flex; gap: 9px; margin-top: 16px; flex-wrap: wrap; }
+.on-bb .bb-dugme { font-size: .76rem; padding: 8px 15px; border-radius: 999px; background: var(--bb-yesil); color: #FFFFFF; }
+.on-bb .bb-dugme--ikinci { background: transparent; color: var(--bb-yesil); border: 1px solid var(--bb-cizgi); }
+
+/* ---------- Hizmetler ---------- */
+.hizmetler { display: grid; gap: 26px; }
+@media (min-width: 760px) { .hizmetler { grid-template-columns: repeat(3, 1fr); } }
+.hizmet h3 { font-size: 1.12rem; margin: 14px 0 0; }
+.hizmet p { color: var(--murekkep-2); font-size: .96rem; margin: 8px 0 0; }
+.hizmet-yay { color: var(--vurgu); }
+
+/* ---------- Süreç ---------- */
+.surec { display: grid; gap: 0; border-top: 1px solid var(--cizgi); }
+.adim { display: grid; gap: 6px 22px; padding: 24px 0; border-bottom: 1px solid var(--cizgi); }
+@media (min-width: 700px) { .adim { grid-template-columns: 64px 1fr 200px; align-items: baseline; } }
+.adim-no { font-family: var(--f-mono); font-size: .82rem; color: var(--vurgu); }
+.adim h3 { font-size: 1.08rem; }
+.adim p { margin: 4px 0 0; color: var(--murekkep-2); font-size: .95rem; }
+.adim-sure { font-family: var(--f-mono); font-size: .78rem; color: var(--soluk); }
+
+/* ---------- İletişim ---------- */
+.iletisim { background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: var(--r); padding: clamp(26px, 4vw, 44px); }
+.iletisim-ic { display: grid; gap: 34px; }
+@media (min-width: 860px) { .iletisim-ic { grid-template-columns: 1fr 1fr; gap: 48px; } }
+.alan { display: grid; gap: 7px; margin-bottom: 15px; }
+.alan label { font-size: .88rem; font-weight: 600; }
+.alan input, .alan textarea {
+  font: inherit; font-size: .96rem;
+  padding: 11px 13px;
+  border: 1px solid var(--cizgi-2); border-radius: 9px;
+  background: var(--zemin); color: var(--murekkep);
+}
+.alan textarea { resize: vertical; min-height: 104px; }
+.alan input:focus, .alan textarea:focus { outline: 2px solid var(--vurgu); outline-offset: 1px; border-color: transparent; }
+.form-not { font-size: .84rem; color: var(--soluk); margin: 12px 0 0; }
+
+.dogrudan { display: grid; gap: 12px; align-content: start; }
+.dogrudan a {
+  display: flex; align-items: center; gap: 13px;
+  padding: 15px 17px; border: 1px solid var(--cizgi); border-radius: 11px;
+  text-decoration: none; background: var(--zemin);
+  transition: border-color .16s, transform .16s;
+}
+.dogrudan a:hover { border-color: var(--vurgu); transform: translateX(2px); }
+.dogrudan b { display: block; font-size: .98rem; }
+.dogrudan span { display: block; font-size: .87rem; color: var(--soluk); font-family: var(--f-mono); }
+
+/* ---------- Alt ---------- */
+.alt { border-top: 1px solid var(--cizgi); padding: 30px 0 44px; margin-top: 20px; }
+.alt-ic { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; font-size: .9rem; color: var(--soluk); }
+
+*:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 3px; border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+
+<header class="ust">
+  <div class="sarmal ust-ic">
+    <a class="marka" href="#ust">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <path d="M3 22.5C3 11.2 11.7 2.5 23 2.5" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+      </svg>
+      Kavis
+    </a>
+    <div class="ust-bosluk"></div>
+    <a class="metin-bag" href="#isler">İşler</a>
+    <a class="dugme" href="#iletisim">Konuşalım</a>
+  </div>
+</header>
+
+<main id="ust">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <svg class="hero-yay" viewBox="0 0 640 640" fill="none" aria-hidden="true">
+      <path d="M40 620C40 300 300 40 620 40" stroke="var(--vurgu)" stroke-width="1.4" opacity=".35"/>
+      <path d="M140 620C140 355 355 140 620 140" stroke="var(--vurgu)" stroke-width="1.4" opacity=".26"/>
+      <path d="M250 620C250 415 415 250 620 250" stroke="var(--vurgu)" stroke-width="1.4" opacity=".18"/>
+    </svg>
+
+    <div class="sarmal hero-ic">
+      <p class="etiket">Kayseri · Web sitesi tasarımı ve yazılım</p>
+      <h1>İki iş yaptım. <em>Birbirine hiç benzemiyorlar.</em></h1>
+      <p class="hero-alt">
+        Biri gece kulübü bileti satan, beş dilde yayında olan bir platform.
+        Diğeri bir psikoloğun sakin, sessiz muayenehane sitesi.
+        İkisi de şablon değil — işin kendisine göre kuruldu.
+      </p>
+      <div class="hero-btn">
+        <a class="dugme" href="https://wa.me/905325146080?text=Merhaba%2C%20web%20sitesi%20i%C3%A7in%20g%C3%B6r%C3%BC%C5%9Fmek%20istiyorum." target="_blank" rel="noopener">WhatsApp'tan yazın</a>
+        <a class="dugme dugme--cizgi" href="#isler">İşlere bakın</a>
+      </div>
+
+      <div class="olcum">
+        <div>
+          <b>0,14 sn</b>
+          <span>psikologbusebozkurt.com açılış süresi</span>
+        </div>
+        <div>
+          <b>1. sıra</b>
+          <span>Google'da "psikolog buse bozkurt"</span>
+        </div>
+        <div>
+          <b>5 dil</b>
+          <span>entryx.com.tr, her dile ayrı adres</span>
+        </div>
+        <div>
+          <b>316 test</b>
+          <span>EntryX sunucusu, her değişiklikte koşuyor</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== İŞLER ===================== -->
+  <section class="bolum" id="isler" style="padding-bottom: 24px;">
+    <div class="sarmal bolum-bas">
+      <p class="etiket">Yaptığım işler</p>
+      <h2>Aynı elden çıktılar. Yan yana koyunca anlaşılmıyor.</h2>
+      <p>
+        Bir web sitesinin nasıl görüneceğine tasarımcı değil, iş karar vermeli.
+        Aşağıdaki ikisi bu yüzden birbirinin zıddı — ve ikisi de şu an yayında.
+      </p>
+    </div>
+  </section>
+
+  <!-- --------- EntryX --------- -->
+  <section class="vaka vaka--ex">
+    <div class="sarmal vaka-ic">
+      <div class="vaka-yazi">
+        <p class="etiket">Bilet platformu · Web + iOS</p>
+        <h3>EntryX</h3>
+        <p>
+          Mekânlar etkinlik açıyor, insanlar bilet alıyor, kapıda QR okutuluyor.
+          Site beş dilde yayında ve her dilin kendi adresi var — Rusça sayfa
+          Rusça bir adreste duruyor, arama motoru ikisini ayrı ayrı tanıyor.
+        </p>
+        <ul class="vaka-liste">
+          <li>
+            <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M2 8l4 4 7-9" stroke="var(--ex-turkuaz)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            App Store'da yayında olan iOS uygulaması
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M2 8l4 4 7-9" stroke="var(--ex-turkuaz)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Türkçe, İngilizce, Rusça, Almanca, Arapça
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M2 8l4 4 7-9" stroke="var(--ex-turkuaz)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Mekân paneli: etkinlik, kapasite, rezervasyon, kupon
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M2 8l4 4 7-9" stroke="var(--ex-turkuaz)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            316 otomatik test, her değişiklikte koşuyor
+          </li>
+        </ul>
+        <a class="vaka-bag" href="https://entryx.com.tr" target="_blank" rel="noopener">
+          entryx.com.tr
+          <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M4 11L11 4M11 4H5M11 4v6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="pencere on-ex" aria-hidden="true">
+        <div class="pencere-bar"><i></i><i></i><i></i><span class="pencere-adres">entryx.com.tr/ru/mekan</span></div>
+        <div class="pencere-govde">
+          <div class="ex-baslik">Bu gece nerede?</div>
+          <div class="ex-alt">İstanbul · Çeşme · Bodrum</div>
+          <div class="ex-satir">
+            <span class="ex-rozet ex-rozet--aktif">Bu hafta</span>
+            <span class="ex-rozet">House</span>
+            <span class="ex-rozet">Techno</span>
+            <span class="ex-rozet">Canlı</span>
+          </div>
+          <div class="ex-kartlar">
+            <div class="ex-kart"><b>Avalon Alaçatı</b><span>Cmt · 23.30</span></div>
+            <div class="ex-kart"><b>Klooz</b><span>Cum · 23.00</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --------- Buse Bozkurt --------- -->
+  <section class="vaka vaka--bb">
+    <div class="sarmal vaka-ic">
+      <div class="pencere on-bb" aria-hidden="true">
+        <div class="pencere-bar"><i></i><i></i><i></i><span class="pencere-adres">psikologbusebozkurt.com</span></div>
+        <div class="pencere-govde">
+          <span class="bb-etiket">Kayseri · Yüz yüze &amp; online</span>
+          <div class="bb-baslik">Konuşmakta zorlandığınız şeyler için <i>güvenli bir alan</i></div>
+          <div class="bb-metin">Oyun terapisi, çocuk–ergen terapisi, bireysel psikoterapi ve ebeveyn danışmanlığı.</div>
+          <div class="bb-satir">
+            <span class="bb-dugme">Randevu Oluştur</span>
+            <span class="bb-dugme bb-dugme--ikinci">WhatsApp'tan Yazın</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="vaka-yazi">
+        <p class="etiket">Muayenehane sitesi · Yönetim paneli</p>
+        <h3>Uzm. Psk. Buse Bozkurt</h3>
+        <p>
+          Bir psikoloğun sitesi. Sakin, yavaş açılmayan, telefonda düzgün duran.
+          Asıl mesele şuydu: içeriği kendisi değiştirebilmeli, her cümle için
+          bana yazmak zorunda kalmamalı.
+        </p>
+        <ul class="vaka-liste">
+          <li>
+            <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M2 8l4 4 7-9" stroke="var(--bb-yesil)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Google'da adıyla arandığında birinci sırada
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M2 8l4 4 7-9" stroke="var(--bb-yesil)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Google'ın yapay zekâ özeti bu siteden besleniyor
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M2 8l4 4 7-9" stroke="var(--bb-yesil)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Sayfa 0,14 saniyede açılıyor
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M2 8l4 4 7-9" stroke="var(--bb-yesil)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Yazıyı düz yazar, HTML bilmesi gerekmiyor
+          </li>
+        </ul>
+        <a class="vaka-bag" href="https://psikologbusebozkurt.com" target="_blank" rel="noopener">
+          psikologbusebozkurt.com
+          <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true"><path d="M4 11L11 4M11 4H5M11 4v6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HİZMETLER ===================== -->
+  <section class="bolum">
+    <div class="sarmal">
+      <div class="bolum-bas">
+        <p class="etiket">Ne yapıyorum</p>
+        <h2>Site kurmak işin yarısı. Diğer yarısı bulunmak.</h2>
+      </div>
+
+      <div class="hizmetler">
+        <div class="hizmet">
+          <svg class="hizmet-yay" width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+            <path d="M4 29C4 15.2 15.2 4 29 4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="29" cy="29" r="2.6" fill="currentColor"/>
+          </svg>
+          <h3>Web sitesi</h3>
+          <p>
+            İşinize göre kurulur, hazır tema üzerine oturtulmaz. Telefonda da,
+            bilgisayarda da düzgün durur. Hızlı açılır — ziyaretçi beklemez.
+          </p>
+        </div>
+        <div class="hizmet">
+          <svg class="hizmet-yay" width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+            <path d="M5 17h24M17 5a24 24 0 0 1 0 24M17 5a24 24 0 0 0 0 24" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="17" cy="17" r="12.4" stroke="currentColor" stroke-width="2.2"/>
+          </svg>
+          <h3>Google'da çıkmak</h3>
+          <p>
+            Site yapmak yetmiyor; insanların sizi araması gereken kelimelerde
+            çıkmanız gerekiyor. Şema, site haritası, hız — hepsi bunun parçası.
+          </p>
+        </div>
+        <div class="hizmet">
+          <svg class="hizmet-yay" width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+            <rect x="5" y="7" width="24" height="20" rx="3" stroke="currentColor" stroke-width="2.2"/>
+            <path d="M10 14h9M10 19h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+          <h3>Kendiniz yönetin</h3>
+          <p>
+            Fiyat, fotoğraf, yazı değişince beni aramanız gerekmez. Panelden
+            kendiniz düzenlersiniz; HTML bilmenize gerek yok.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SÜREÇ ===================== -->
+  <section class="bolum" style="padding-top: 20px;">
+    <div class="sarmal">
+      <div class="bolum-bas">
+        <p class="etiket">Nasıl ilerliyoruz</p>
+        <h2>Sürpriz yok. Üç adım, baştan konuşulmuş fiyat.</h2>
+      </div>
+
+      <div class="surec">
+        <div class="adim">
+          <div class="adim-no">01</div>
+          <div>
+            <h3>Konuşuyoruz</h3>
+            <p>İşinizi, müşterinizin sizi nasıl aradığını ve neye ihtiyacınız olduğunu anlıyorum. Ücretsiz.</p>
+          </div>
+          <div class="adim-sure">30–45 dakika</div>
+        </div>
+        <div class="adim">
+          <div class="adim-no">02</div>
+          <div>
+            <h3>Tasarımı görüyorsunuz</h3>
+            <p>Kod yazmadan önce sitenin nasıl görüneceğini gösteriyorum. Beğenmezseniz değişiyor.</p>
+          </div>
+          <div class="adim-sure">3–5 gün</div>
+        </div>
+        <div class="adim">
+          <div class="adim-no">03</div>
+          <div>
+            <h3>Yayına alıyoruz</h3>
+            <p>Site açılıyor, Google'a bildiriliyor, paneli birlikte geziyoruz. Sonrası size kalıyor.</p>
+          </div>
+          <div class="adim-sure">1–3 hafta</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== İLETİŞİM ===================== -->
+  <section class="bolum" id="iletisim">
+    <div class="sarmal">
+      <div class="bolum-bas">
+        <p class="etiket">İletişim</p>
+        <h2>Ne yaptırmak istediğinizi anlatın, birlikte bakalım.</h2>
+        <p>Fikriniz net olmasa da olur. Çoğu iş "sitem yok, ne yapmam lazım" diye başlıyor.</p>
+      </div>
+
+      <div class="iletisim">
+        <div class="iletisim-ic">
+          <form id="form">
+            <div class="alan">
+              <label for="ad">Adınız</label>
+              <input id="ad" name="ad" type="text" autocomplete="name" required>
+            </div>
+            <div class="alan">
+              <label for="is">İşiniz ne?</label>
+              <input id="is" name="is" type="text" placeholder="Kafe, diş kliniği, avukatlık bürosu…" required>
+            </div>
+            <div class="alan">
+              <label for="mesaj">Ne yaptırmak istiyorsunuz?</label>
+              <textarea id="mesaj" name="mesaj" required></textarea>
+            </div>
+            <button class="dugme" type="submit">WhatsApp'ta gönder</button>
+            <p class="form-not">
+              Form doldurulunca WhatsApp açılır ve mesaj hazır gelir — göndermeden önce
+              okuyup değiştirebilirsiniz. Hiçbir bilgi burada saklanmıyor.
+            </p>
+          </form>
+
+          <div class="dogrudan">
+            <a href="https://wa.me/905325146080?text=Merhaba%2C%20web%20sitesi%20i%C3%A7in%20g%C3%B6r%C3%BC%C5%9Fmek%20istiyorum." target="_blank" rel="noopener">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3.5 20.5l1.3-4.6A8.2 8.2 0 1 1 8.2 19l-4.7 1.5z" stroke="var(--vurgu)" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+              <span><b>WhatsApp</b><span>0 532 514 60 80</span></span>
+            </a>
+            <a href="tel:+905325146080">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 4h3.5l1.6 4-2.1 1.4a11.5 11.5 0 0 0 5.6 5.6L15 12.9l4 1.6V18a2 2 0 0 1-2.2 2A15 15 0 0 1 3 6.2 2 2 0 0 1 5 4z" stroke="var(--vurgu)" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+              <span><b>Telefon</b><span>0 532 514 60 80</span></span>
+            </a>
+            <a href="mailto:melihalpmazi885@gmail.com">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="var(--vurgu)" stroke-width="1.8"/>
+                <path d="M3.8 6.5L12 12.6l8.2-6.1" stroke="var(--vurgu)" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+              <span><b>E-posta</b><span>melihalpmazi885@gmail.com</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="alt">
+  <div class="sarmal alt-ic">
+    <span>Kavis · Kayseri</span>
+    <span>Web sitesi tasarımı ve yazılım</span>
+  </div>
+</footer>
+
+<script>
+/* Form gönderilince WhatsApp mesajı hazırlanıyor.
+   Sunucu yok: form bir yere kaydedilmiyor, doğrudan sohbete taşınıyor.
+   Böylece mesaj kaybolmuyor ve dönüş aynı kanaldan oluyor. */
+document.getElementById('form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var ad = document.getElementById('ad').value.trim();
+  var is = document.getElementById('is').value.trim();
+  var mesaj = document.getElementById('mesaj').value.trim();
+  var metin =
+    'Merhaba, ben ' + ad + '.\n' +
+    'İşim: ' + is + '\n\n' +
+    mesaj;
+  window.open('https://wa.me/905325146080?text=' + encodeURIComponent(metin), '_blank', 'noopener');
+});
+</script>
+
+</body>
+</html>
