@@ -182,7 +182,12 @@ img { max-width: 100%; display: block; }
 .vaka--bb li b { color: var(--bb-yesil); }
 .vaka--bb .git { color: var(--bb-yesil); border-color: var(--bb-yesil); }
 
-.cerceve { border-radius: 190px 190px 14px 14px; overflow: hidden; box-shadow: 0 26px 70px rgba(0,0,0,.28); }
+.cerceve {
+  border-radius: 190px 190px 14px 14px; overflow: hidden;
+  box-shadow: 0 26px 70px rgba(0,0,0,.28);
+  transition: transform .5s cubic-bezier(.2,.8,.3,1), box-shadow .5s;
+}
+.vaka-gor:hover .cerceve { transform: translateY(-8px); box-shadow: 0 38px 90px rgba(0,0,0,.36); }
 .cerceve img { width: 100%; height: auto; }
 
 .hiz { margin-top: 44px; border-top: 1px solid var(--cizgi); }
@@ -199,22 +204,32 @@ img { max-width: 100%; display: block; }
 .adm p { margin: 5px 0 0; color: var(--ink-2); font-size: .96rem; }
 .adm-s { font-size: .84rem; color: var(--soluk); }
 
-.ilt { margin-top: 44px; display: grid; gap: 44px; }
+/* Form kendi yuzeyinde: onceden yalnizca alt cizgiler vardi, alanlar
+   bosluk gibi duruyor ve bolum yarim okunuyordu. */
+.ilt { margin-top: 44px; display: grid; gap: 34px; }
+.ilt-panel { background: var(--kagit-2); border: 1px solid var(--cizgi); border-radius: 18px; padding: clamp(24px, 3.4vw, 38px); }
 @media (min-width: 900px) { .ilt { grid-template-columns: 1.15fr .85fr; gap: 60px; } }
 .aln { display: grid; gap: 8px; margin-bottom: 18px; }
 .aln label { font-size: .86rem; font-weight: 600; }
 .aln input, .aln textarea {
-  font: inherit; font-size: 1rem; padding: 13px 0;
-  border: none; border-bottom: 1.5px solid var(--cizgi);
-  background: transparent; color: var(--murekkep); border-radius: 0;
+  font: inherit; font-size: 1rem; padding: 14px 16px;
+  border: 1px solid var(--cizgi); border-radius: 10px;
+  background: var(--kagit); color: var(--murekkep);
+  transition: border-color .16s ease;
 }
-.aln textarea { resize: vertical; min-height: 92px; }
-.aln input:focus, .aln textarea:focus { outline: none; border-bottom-color: var(--murekkep); }
+.aln textarea { resize: vertical; min-height: 118px; }
+.aln input::placeholder, .aln textarea::placeholder { color: var(--soluk); }
+.aln input:focus, .aln textarea:focus { outline: none; border-color: var(--murekkep); }
 .not { font-size: .84rem; color: var(--soluk); margin: 16px 0 0; max-width: 44ch; }
 
-.knl { border-top: 1px solid var(--cizgi); align-self: start; }
-.knl a { display: flex; align-items: baseline; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--cizgi); text-decoration: none; transition: padding-left .18s ease; }
-.knl a:hover { padding-left: 8px; }
+.knl { align-self: start; display: grid; gap: 24px; }
+.durum { display: flex; align-items: center; gap: 11px; font-size: .95rem; font-weight: 600; }
+.durum i { width: 9px; height: 9px; border-radius: 50%; background: #2FA36B; flex: none; box-shadow: 0 0 0 4px rgba(47,163,107,.16); }
+.knl-liste { border-top: 1px solid var(--cizgi); }
+.knl-alt { font-size: .92rem; color: var(--soluk); line-height: 1.75; margin: 0; }
+.knl-alt b { color: var(--murekkep); font-weight: 600; }
+.knl-liste a { display: flex; align-items: baseline; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--cizgi); text-decoration: none; transition: padding-left .18s ease; }
+.knl-liste a:hover { padding-left: 8px; }
 .knl b { font-family: var(--f-dis); font-weight: 600; font-size: 1.04rem; letter-spacing: -.02em; width: 8.5ch; flex: none; }
 .knl span { color: var(--soluk); font-variant-numeric: tabular-nums; }
 
@@ -397,7 +412,7 @@ img { max-width: 100%; display: block; }
       <p class="kck">İletişim</p>
       <h2>Ne yaptırmak istediğinizi anlatın, <i>birlikte bakalım.</i></h2>
       <div class="ilt">
-        <form id="frm">
+        <form id="frm" class="ilt-panel">
           <div class="aln">
             <label for="ad">Adınız</label>
             <input id="ad" name="ad" type="text" autocomplete="name" required>
@@ -415,9 +430,17 @@ img { max-width: 100%; display: block; }
         </form>
 
         <div class="knl">
-          <a href="https://wa.me/905325146080?text=Merhaba%2C%20web%20sitesi%20i%C3%A7in%20g%C3%B6r%C3%BC%C5%9Fmek%20istiyorum." target="_blank" rel="noopener"><b>WhatsApp</b><span>0 532 514 60 80</span></a>
-          <a href="tel:+905325146080"><b>Telefon</b><span>0 532 514 60 80</span></a>
-          <a href="mailto:melihalpmazi885@gmail.com"><b>E-posta</b><span>melihalpmazi885@gmail.com</span></a>
+          <div class="durum"><i></i> Şu an yeni iş alıyorum</div>
+          <div class="knl-liste">
+            <a href="https://wa.me/905325146080?text=Merhaba%2C%20web%20sitesi%20i%C3%A7in%20g%C3%B6r%C3%BC%C5%9Fmek%20istiyorum." target="_blank" rel="noopener"><b>WhatsApp</b><span>0 532 514 60 80</span></a>
+            <a href="tel:+905325146080"><b>Telefon</b><span>0 532 514 60 80</span></a>
+            <a href="mailto:melihalpmazi885@gmail.com"><b>E-posta</b><span>melihalpmazi885@gmail.com</span></a>
+          </div>
+          <p class="knl-alt">
+            Mesajlara genelde <b>aynı gün</b> dönüyorum. İlk görüşme ücretsiz ve
+            bir şey satın almak zorunda değilsiniz — çoğu konuşma
+            <b>&ldquo;sitem yok, ne yapmam lazım&rdquo;</b> diye başlıyor.
+          </p>
         </div>
       </div>
     </div>
