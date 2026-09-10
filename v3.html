@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kavis</title>
+<meta name="description" content="Kayseri'de web sitesi tasarımı ve yazılım. İşinize göre kurulan, hızlı açılan, Google'da bulunan siteler.">
+<meta name="theme-color" content="#08090C">
+<meta property="og:title" content="Kavis — Kayseri web sitesi tasarımı">
+<meta property="og:description" content="İki gerçek referans, iki bambaşka iş. Şablon değil, işinize göre kurulan siteler.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 26 26%22%3E%3Cpath d=%22M3 22.5C3 11.2 11.7 2.5 23 2.5%22 stroke=%22%2334D9C0%22 stroke-width=%223.4%22 stroke-linecap=%22round%22 fill=%22none%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+
+<style>
+/* ==========================================================
+   KAVİS — koyu, sinematik, kaydırdıkça yaşayan
+   Renk kaynağı yine yayın gradyanı: EntryX'in mavisinden
+   Buse'nin kiline. Burada ışık olarak kullanılıyor.
+   ========================================================== */
+
+:root {
+  --zemin:   #08090C;
+  --kat:     #101218;
+  --kat-2:   #171A22;
+  --ink:     #F6F5F2;
+  --ink-2:   #B9BEC8;
+  --soluk:   #7C838F;
+  --cizgi:   #1E2129;
+
+  --mavi:    #2F6EDB;
+  --turkuaz: #34D9C0;
+  --yesil:   #2F5D50;
+  --kil:     #E08A5F;
+
+  --f-dis: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
+  --f-ser: "Instrument Serif", Georgia, serif;
+  --f-gov: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+  --en: 1240px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--zemin);
+  color: var(--ink);
+  font-family: var(--f-gov);
+  font-size: 17px; line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; }
+img { max-width: 100%; height: auto; display: block; }
+
+.sar { width: 100%; max-width: var(--en); margin: 0 auto; padding: 0 26px; }
+
+.kck { font-size: .72rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--turkuaz); margin: 0; }
+
+/* ---------- imleç ışığı ---------- */
+#isik {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 30%),
+              rgba(52,217,192,.10), transparent 62%);
+  transition: opacity .4s; opacity: 0;
+}
+@media (hover: hover) and (min-width: 900px) { #isik { opacity: 1; } }
+
+/* ---------- üst ---------- */
+.ust { position: sticky; top: 0; z-index: 30; backdrop-filter: blur(14px); background: rgba(8,9,12,.72); border-bottom: 1px solid transparent; transition: border-color .3s; }
+.ust.kaydi { border-color: var(--cizgi); }
+.ust-ic { display: flex; align-items: center; gap: 18px; height: 70px; }
+.mrk { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--f-dis); font-weight: 800; font-size: 1.32rem; letter-spacing: -.045em; }
+.mrk svg path { stroke: var(--turkuaz); }
+.bsl { flex: 1; }
+.ust .bag { text-decoration: none; color: var(--ink-2); font-size: .94rem; transition: color .2s; }
+.ust .bag:hover { color: var(--ink); }
+
+.btn {
+  position: relative; display: inline-flex; align-items: center; gap: 9px;
+  background: var(--turkuaz); color: #06231E;
+  padding: 13px 26px; border-radius: 100px;
+  text-decoration: none; font-weight: 600; font-size: .95rem;
+  border: 1.5px solid var(--turkuaz); cursor: pointer; font-family: var(--f-gov);
+  transition: transform .2s ease, box-shadow .3s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 34px rgba(52,217,192,.32); }
+.btn--bos { background: transparent; color: var(--ink); border-color: var(--cizgi); }
+.btn--bos:hover { border-color: var(--turkuaz); color: var(--turkuaz); box-shadow: none; }
+
+/* ---------- hero ---------- */
+.hero { position: relative; z-index: 1; padding: 76px 0 54px; }
+.hero::before {
+  content: ""; position: absolute; left: 50%; top: -180px; transform: translateX(-50%);
+  width: 1100px; height: 640px; pointer-events: none; z-index: -1;
+  background: radial-gradient(closest-side, rgba(47,110,219,.20), transparent 72%),
+              radial-gradient(closest-side, rgba(52,217,192,.14), transparent 66%);
+  filter: blur(14px);
+}
+.hero h1 {
+  font-family: var(--f-dis); font-weight: 800;
+  font-size: clamp(2.9rem, .8rem + 9.4vw, 8.4rem);
+  line-height: .87; letter-spacing: -.055em; margin: 22px 0 0;
+}
+.hero h1 i { font-family: var(--f-ser); font-style: italic; font-weight: 400; letter-spacing: -.012em;
+  background: linear-gradient(96deg, var(--mavi), var(--turkuaz) 46%, var(--kil));
+  -webkit-background-clip: text; background-clip: text; color: transparent; }
+.kelime { display: inline-block; }
+.hero-alt { font-size: clamp(1.05rem, .95rem + .5vw, 1.3rem); color: var(--ink-2); max-width: 44ch; margin: 30px 0 0; }
+.hero-btn { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 36px; }
+
+/* ---------- akan şerit ---------- */
+.serit { margin-top: 66px; border-top: 1px solid var(--cizgi); border-bottom: 1px solid var(--cizgi); overflow: hidden; padding: 17px 0; background: var(--kat); }
+.serit-ic { display: flex; width: max-content; animation: kay 34s linear infinite; }
+.serit b { font-family: var(--f-dis); font-weight: 500; font-size: 1.05rem; letter-spacing: -.015em; color: var(--soluk); white-space: nowrap; display: flex; align-items: center; gap: 34px; padding-right: 34px; transition: color .3s; }
+.serit b::after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--turkuaz); flex: none; }
+.serit:hover b { color: var(--ink-2); }
+@keyframes kay { to { transform: translateX(-50%); } }
+
+/* ---------- sayılar ---------- */
+.say { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--cizgi); border: 1px solid var(--cizgi); border-radius: 18px; overflow: hidden; margin-top: 76px; }
+@media (min-width: 880px) { .say { grid-template-columns: repeat(4, 1fr); } }
+.say div { background: var(--zemin); padding: 30px 26px 34px; transition: background .3s; }
+.say div:hover { background: var(--kat); }
+.say b { display: block; font-family: var(--f-dis); font-weight: 800; font-size: clamp(2.1rem, 1.3rem + 2.4vw, 3.2rem); letter-spacing: -.05em; line-height: 1; font-variant-numeric: tabular-nums;
+  background: linear-gradient(140deg, var(--ink), var(--turkuaz)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.say span { display: block; font-size: .87rem; color: var(--soluk); margin-top: 11px; max-width: 22ch; }
+
+/* ---------- bölüm ---------- */
+.blm { padding: 108px 0 0; position: relative; z-index: 1; }
+.blm h2 { font-family: var(--f-dis); font-weight: 800; font-size: clamp(2rem, 1.2rem + 3.6vw, 4.2rem); line-height: .94; letter-spacing: -.05em; margin: 18px 0 0; max-width: 19ch; text-wrap: balance; }
+.blm h2 i { font-family: var(--f-ser); font-style: italic; font-weight: 400; letter-spacing: -.012em; color: var(--turkuaz); }
+.blm-not { max-width: 48ch; color: var(--ink-2); margin: 24px 0 0; }
+
+/* ---------- vaka ---------- */
+.vaka { position: relative; z-index: 1; padding: 86px 0; margin-top: 66px; overflow: hidden; }
+.vaka-ic { display: grid; gap: 46px; align-items: center; }
+@media (min-width: 980px) { .vaka-ic { grid-template-columns: .88fr 1.12fr; gap: 62px; } }
+@media (min-width: 980px) { .vaka--ters .vaka-ic { grid-template-columns: 1.12fr .88fr; } .vaka--ters .sahne { order: -1; } }
+
+.vaka h3 { font-family: var(--f-dis); font-weight: 800; font-size: clamp(2rem, 1.3rem + 2.2vw, 3.2rem); letter-spacing: -.05em; line-height: 1; margin: 16px 0 0; }
+.vaka p { margin: 20px 0 0; font-size: 1.03rem; }
+.vaka ul { list-style: none; padding: 0; margin: 28px 0 0; }
+.vaka li { padding: 13px 0; border-top: 1px solid; font-size: .96rem; display: flex; gap: 16px; align-items: baseline; }
+.vaka li b { font-weight: 600; flex: none; width: 2.2ch; font-variant-numeric: tabular-nums; }
+.vaka .git { display: inline-block; margin-top: 32px; font-weight: 600; text-decoration: none; border-bottom: 1.5px solid; padding-bottom: 4px; transition: gap .2s; }
+
+.vaka--ex { background: #070B16; color: #F2F4FA; }
+.vaka--ex::before { content: ""; position: absolute; right: -12%; top: -10%; width: 780px; height: 780px; border-radius: 50%; background: radial-gradient(closest-side, rgba(47,110,219,.20), transparent 70%); pointer-events: none; }
+.vaka--ex .kck { color: var(--turkuaz); }
+.vaka--ex p { color: #98A2B9; }
+.vaka--ex li { border-color: #1B2233; }
+.vaka--ex li b { color: var(--turkuaz); }
+.vaka--ex .git { color: #FF7D99; border-color: #FF7D99; }
+
+.vaka--bb { background: #F8F6F1; color: #2B2724; }
+.vaka--bb::before { content: ""; position: absolute; left: -14%; bottom: -22%; width: 720px; height: 720px; border-radius: 50%; background: radial-gradient(closest-side, rgba(47,93,80,.14), transparent 70%); pointer-events: none; }
+.vaka--bb .kck { color: #B4623F; }
+.vaka--bb p { color: #857B72; }
+.vaka--bb li { border-color: #E2DACE; }
+.vaka--bb li b { color: #2F5D50; }
+.vaka--bb .git { color: #2F5D50; border-color: #2F5D50; }
+
+/* sahne: masaüstü + mobil üst üste */
+.sahne { position: relative; }
+.mst { border-radius: 16px; overflow: hidden; box-shadow: 0 34px 80px rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.07); }
+.mbl { position: absolute; right: -14px; bottom: -34px; width: 27%; min-width: 118px; border-radius: 20px; overflow: hidden; box-shadow: 0 24px 56px rgba(0,0,0,.55); border: 3px solid #14161B; }
+.vaka--bb .mbl { border-color: #EDE7DC; }
+@media (max-width: 620px) { .mbl { right: -8px; bottom: -22px; width: 30%; } }
+
+/* ---------- hizmet ---------- */
+.hiz { margin-top: 52px; border-top: 1px solid var(--cizgi); }
+.hiz-o { display: grid; gap: 10px 34px; padding: 34px 0; border-bottom: 1px solid var(--cizgi); transition: padding-left .3s ease, background .3s ease; }
+@media (min-width: 780px) { .hiz-o { grid-template-columns: 1fr 1.7fr; align-items: start; } }
+.hiz-o:hover { padding-left: 14px; background: linear-gradient(90deg, rgba(52,217,192,.06), transparent 40%); }
+.hiz-o h3 { font-family: var(--f-dis); font-weight: 500; font-size: 1.6rem; letter-spacing: -.035em; margin: 0; }
+.hiz-o p { margin: 0; color: var(--ink-2); }
+
+/* ---------- süreç ---------- */
+.srx { margin-top: 52px; }
+.adm { display: grid; gap: 8px 30px; padding: 30px 0; border-top: 1px solid var(--cizgi); }
+@media (min-width: 780px) { .adm { grid-template-columns: 92px 1fr 180px; align-items: baseline; } }
+.adm-n { font-family: var(--f-ser); font-style: italic; font-size: 2rem; line-height: 1; color: var(--turkuaz); }
+.adm h3 { font-family: var(--f-dis); font-weight: 500; font-size: 1.22rem; letter-spacing: -.025em; margin: 0; }
+.adm p { margin: 6px 0 0; color: var(--ink-2); font-size: .97rem; }
+.adm-s { font-size: .85rem; color: var(--soluk); }
+
+/* ---------- iletişim ---------- */
+.ilt { margin-top: 52px; display: grid; gap: 36px; }
+@media (min-width: 920px) { .ilt { grid-template-columns: 1.12fr .88fr; gap: 60px; } }
+.panel { background: var(--kat); border: 1px solid var(--cizgi); border-radius: 22px; padding: clamp(26px, 3.6vw, 40px); }
+.aln { display: grid; gap: 9px; margin-bottom: 20px; }
+.aln label { font-size: .87rem; font-weight: 600; }
+.aln input, .aln textarea {
+  font: inherit; font-size: 1rem; padding: 15px 17px;
+  border: 1px solid var(--cizgi); border-radius: 12px;
+  background: var(--zemin); color: var(--ink); transition: border-color .2s, box-shadow .2s;
+}
+.aln textarea { resize: vertical; min-height: 122px; }
+.aln input::placeholder, .aln textarea::placeholder { color: var(--soluk); }
+.aln input:focus, .aln textarea:focus { outline: none; border-color: var(--turkuaz); box-shadow: 0 0 0 4px rgba(52,217,192,.12); }
+.not { font-size: .85rem; color: var(--soluk); margin: 18px 0 0; max-width: 44ch; }
+
+.knl { align-self: start; display: grid; gap: 26px; }
+.durum { display: flex; align-items: center; gap: 12px; font-size: .96rem; font-weight: 600; }
+.durum i { width: 9px; height: 9px; border-radius: 50%; background: var(--turkuaz); flex: none; box-shadow: 0 0 0 4px rgba(52,217,192,.16); animation: nabz 2.4s ease-in-out infinite; }
+@keyframes nabz { 50% { box-shadow: 0 0 0 9px rgba(52,217,192,0); } }
+.knl-liste { border-top: 1px solid var(--cizgi); }
+.knl-liste a { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 18px; padding: 19px 0; border-bottom: 1px solid var(--cizgi); text-decoration: none; transition: padding-left .22s ease, color .22s; }
+.knl-liste a:hover { padding-left: 10px; color: var(--turkuaz); }
+.knl-liste b { font-family: var(--f-dis); font-weight: 500; font-size: 1.06rem; letter-spacing: -.025em; width: 8.5ch; flex: none; }
+/* Uzun e-posta dar ekranda satiri tasirmasin: once alta insin, gerekirse kirilsin. */
+.knl-liste span { color: var(--soluk); font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap: anywhere; }
+.knl-alt { font-size: .93rem; color: var(--soluk); line-height: 1.75; margin: 0; }
+.knl-alt b { color: var(--ink); font-weight: 600; }
+
+.alt { padding: 62px 0 54px; margin-top: 104px; border-top: 1px solid var(--cizgi); position: relative; z-index: 1; }
+.alt-ic { display: flex; flex-wrap: wrap; gap: 12px 26px; justify-content: space-between; font-size: .9rem; color: var(--soluk); }
+
+*:focus-visible { outline: 2px solid var(--turkuaz); outline-offset: 4px; border-radius: 4px; }
+
+/* ---------- hareket: JS varsa devreye girer, yoksa her şey görünür ---------- */
+.anim [data-gel] { opacity: 0; transform: translateY(26px); }
+.anim [data-gel].gor { opacity: 1; transform: none; transition: opacity .8s cubic-bezier(.2,.8,.3,1), transform .8s cubic-bezier(.2,.8,.3,1); }
+.anim .kelime { opacity: 0; transform: translateY(.34em) rotate(1.4deg); }
+.anim .kelime.gor { opacity: 1; transform: none; transition: opacity .7s cubic-bezier(.2,.9,.3,1), transform .7s cubic-bezier(.2,.9,.3,1); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .anim [data-gel], .anim .kelime { opacity: 1 !important; transform: none !important; }
+  .serit-ic { animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div id="isik" aria-hidden="true"></div>
+
+<header class="ust" id="ust-cubuk">
+  <div class="sar ust-ic">
+    <a class="mrk" href="#ust">
+      <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <path d="M3 22.5C3 11.2 11.7 2.5 23 2.5" stroke-width="3.4" stroke-linecap="round"/>
+      </svg>
+      Kavis
+    </a>
+    <div class="bsl"></div>
+    <a class="bag" href="#isler">İşler</a>
+    <a class="btn" href="#iletisim">Konuşalım</a>
+  </div>
+</header>
+
+<main id="ust">
+
+  <section class="hero">
+    <div class="sar">
+      <p class="kck" data-gel>Kayseri · Web sitesi tasarımı ve yazılım</p>
+      <h1 id="baslik">İki iş yaptım. <i>Birbirine hiç</i> benzemiyorlar.</h1>
+      <p class="hero-alt" data-gel>
+        Biri gece kulübü bileti satan, beş dilde yayında bir platform.
+        Diğeri bir psikoloğun sessiz muayenehane sitesi.
+      </p>
+      <div class="hero-btn" data-gel>
+        <a class="btn" href="https://wa.me/905325146080?text=Merhaba%2C%20web%20sitesi%20i%C3%A7in%20g%C3%B6r%C3%BC%C5%9Fmek%20istiyorum." target="_blank" rel="noopener">WhatsApp'tan yazın</a>
+        <a class="btn btn--bos" href="#isler">İşlere bakın</a>
+      </div>
+    </div>
+
+    <div class="serit" aria-hidden="true">
+      <div class="serit-ic"><b>Web sitesi</b><b>Google'da çıkmak</b><b>Yönetim paneli</b><b>Mobil uyumlu</b><b>Hızlı açılış</b><b>E-ticaret</b><b>Randevu sistemi</b><b>Çok dilli</b><b>Web sitesi</b><b>Google'da çıkmak</b><b>Yönetim paneli</b><b>Mobil uyumlu</b><b>Hızlı açılış</b><b>E-ticaret</b><b>Randevu sistemi</b><b>Çok dilli</b></div>
+    </div>
+
+    <div class="sar">
+      <div class="say" data-gel>
+        <div><b data-sayac="0,14 sn">0,14 sn</b><span>psikologbusebozkurt.com açılış süresi</span></div>
+        <div><b>1. sıra</b><span>Google'da "psikolog buse bozkurt"</span></div>
+        <div><b>5 dil</b><span>entryx.com.tr, her dile ayrı adres</span></div>
+        <div><b>316 test</b><span>EntryX sunucusu, her değişiklikte koşuyor</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blm" id="isler">
+    <div class="sar">
+      <p class="kck" data-gel>Yaptığım işler</p>
+      <h2 data-gel>Aynı elden çıktılar. <i>Yan yana koyunca</i> anlaşılmıyor.</h2>
+      <p class="blm-not" data-gel>
+        Bir sitenin nasıl görüneceğine tasarımcı değil, işin kendisi karar vermeli.
+        Aşağıdaki ikisi bu yüzden birbirinin zıddı — ve ikisi de şu an yayında.
+      </p>
+    </div>
+  </section>
+
+  <section class="vaka vaka--ex">
+    <div class="sar vaka-ic">
+      <div>
+        <p class="kck" data-gel>Bilet platformu · Web + iOS</p>
+        <h3 data-gel>EntryX</h3>
+        <p data-gel>
+          Mekânlar etkinlik açıyor, insanlar bilet alıyor, kapıda QR okutuluyor.
+          Beş dilde yayında ve her dilin kendi adresi var — Rusça sayfa Rusça bir
+          adreste duruyor, arama motoru ikisini ayrı ayrı tanıyor.
+        </p>
+        <ul data-gel>
+          <li><b>01</b><span>App Store'da yayında olan iOS uygulaması</span></li>
+          <li><b>02</b><span>Türkçe, İngilizce, Rusça, Almanca, Arapça</span></li>
+          <li><b>03</b><span>Mekân paneli: etkinlik, kapasite, rezervasyon, kupon</span></li>
+          <li><b>04</b><span>316 otomatik test, her değişiklikte koşuyor</span></li>
+        </ul>
+        <a class="git" data-gel href="https://entryx.com.tr" target="_blank" rel="noopener">entryx.com.tr &nearr;</a>
+      </div>
+      <div class="sahne" data-gel data-parallaks>
+        <div class="mst"><img src="__EX_D__" alt="EntryX ana sayfası: koyu zeminde büyük tipografiyle GECEYE GİRİŞ BURADAN başlığı" width="1280" height="800" loading="lazy"></div>
+        <div class="mbl"><img src="__EX_M__" alt="EntryX'in telefondaki görünümü" width="520" height="1040" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vaka vaka--bb vaka--ters">
+    <div class="sar vaka-ic">
+      <div>
+        <p class="kck" data-gel>Muayenehane sitesi · Yönetim paneli</p>
+        <h3 data-gel>Uzm. Psk. Buse Bozkurt</h3>
+        <p data-gel>
+          Bir psikoloğun sitesi. Sakin, yavaş açılmayan, telefonda düzgün duran.
+          Asıl mesele şuydu: içeriği kendisi değiştirebilmeli, her cümle için
+          bana yazmak zorunda kalmamalı.
+        </p>
+        <ul data-gel>
+          <li><b>01</b><span>Google'da adıyla arandığında birinci sırada</span></li>
+          <li><b>02</b><span>Google'ın yapay zekâ özeti bu siteden besleniyor</span></li>
+          <li><b>03</b><span>Sayfa 0,14 saniyede açılıyor</span></li>
+          <li><b>04</b><span>Yazıyı düz yazar, HTML bilmesi gerekmiyor</span></li>
+        </ul>
+        <a class="git" data-gel href="https://psikologbusebozkurt.com" target="_blank" rel="noopener">psikologbusebozkurt.com &nearr;</a>
+      </div>
+      <div class="sahne" data-gel data-parallaks>
+        <div class="mst"><img src="__BB_D__" alt="Buse Bozkurt sitesi: krem zeminde serif başlık ve randevu düğmeleri" width="1280" height="800" loading="lazy"></div>
+        <div class="mbl"><img src="__BB_M__" alt="Buse Bozkurt sitesinin telefondaki görünümü" width="520" height="1040" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blm">
+    <div class="sar">
+      <p class="kck" data-gel>Ne yapıyorum</p>
+      <h2 data-gel>Site kurmak işin yarısı. <i>Diğer yarısı</i> bulunmak.</h2>
+      <div class="hiz">
+        <div class="hiz-o" data-gel><h3>Web sitesi</h3><p>İşinize göre kurulur, hazır tema üzerine oturtulmaz. Telefonda da bilgisayarda da düzgün durur, hızlı açılır — ziyaretçi beklemez.</p></div>
+        <div class="hiz-o" data-gel><h3>Google'da çıkmak</h3><p>Site yapmak yetmiyor; insanların sizi araması gereken kelimelerde çıkmanız gerekiyor. Şema, site haritası, hız — hepsi bunun parçası.</p></div>
+        <div class="hiz-o" data-gel><h3>Kendiniz yönetin</h3><p>Fiyat, fotoğraf, yazı değişince beni aramanız gerekmez. Panelden kendiniz düzenlersiniz; HTML bilmenize gerek yok.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blm">
+    <div class="sar">
+      <p class="kck" data-gel>Nasıl ilerliyoruz</p>
+      <h2 data-gel>Sürpriz yok. <i>Üç adım,</i> baştan konuşulmuş fiyat.</h2>
+      <div class="srx">
+        <div class="adm" data-gel><div class="adm-n">bir</div><div><h3>Konuşuyoruz</h3><p>İşinizi, müşterinizin sizi nasıl aradığını ve neye ihtiyacınız olduğunu anlıyorum. Ücretsiz.</p></div><div class="adm-s">30–45 dakika</div></div>
+        <div class="adm" data-gel><div class="adm-n">iki</div><div><h3>Tasarımı görüyorsunuz</h3><p>Kod yazmadan önce sitenin nasıl görüneceğini gösteriyorum. Beğenmezseniz değişiyor.</p></div><div class="adm-s">3–5 gün</div></div>
+        <div class="adm" data-gel><div class="adm-n">üç</div><div><h3>Yayına alıyoruz</h3><p>Site açılıyor, Google'a bildiriliyor, paneli birlikte geziyoruz. Sonrası size kalıyor.</p></div><div class="adm-s">1–3 hafta</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blm" id="iletisim">
+    <div class="sar">
+      <p class="kck" data-gel>İletişim</p>
+      <h2 data-gel>Ne yaptırmak istediğinizi anlatın, <i>birlikte bakalım.</i></h2>
+      <div class="ilt">
+        <form id="frm" class="panel" data-gel>
+          <div class="aln"><label for="ad">Adınız</label><input id="ad" type="text" autocomplete="name" required></div>
+          <div class="aln"><label for="is">İşiniz ne?</label><input id="is" type="text" placeholder="Kafe, diş kliniği, avukatlık bürosu…" required></div>
+          <div class="aln"><label for="msj">Ne yaptırmak istiyorsunuz?</label><textarea id="msj" required></textarea></div>
+          <button class="btn" type="submit">WhatsApp'ta gönder</button>
+          <p class="not">Form doldurulunca WhatsApp açılır ve mesaj hazır gelir — göndermeden önce okuyup değiştirebilirsiniz. Hiçbir bilgi burada saklanmıyor.</p>
+        </form>
+
+        <div class="knl" data-gel>
+          <div class="durum"><i></i> Şu an yeni iş alıyorum</div>
+          <div class="knl-liste">
+            <a href="https://wa.me/905325146080?text=Merhaba%2C%20web%20sitesi%20i%C3%A7in%20g%C3%B6r%C3%BC%C5%9Fmek%20istiyorum." target="_blank" rel="noopener"><b>WhatsApp</b><span>0 532 514 60 80</span></a>
+            <a href="tel:+905325146080"><b>Telefon</b><span>0 532 514 60 80</span></a>
+            <a href="mailto:melihalpmazi885@gmail.com"><b>E-posta</b><span>melihalpmazi885@gmail.com</span></a>
+          </div>
+          <p class="knl-alt">Mesajlara genelde <b>aynı gün</b> dönüyorum. İlk görüşme ücretsiz ve bir şey satın almak zorunda değilsiniz — çoğu konuşma <b>&ldquo;sitem yok, ne yapmam lazım&rdquo;</b> diye başlıyor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="alt">
+  <div class="sar alt-ic">
+    <span>Kavis · Kayseri</span>
+    <span>Web sitesi tasarımı ve yazılım</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var az = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Hareket YALNIZCA JS calisirsa aciliyor: js yoksa ya da bir yerde
+     kirilirsa sayfa tamamen gorunur kaliyor. Ayrica 2,5 sn sonra her
+     sey aciliyor — gozlemci hic tetiklenmese bile icerik kaybolmasin. */
+  if (!az) document.documentElement.classList.add('anim');
+
+  /* Basligi kelimelere ayir: sirayla yukselsinler */
+  var b = document.getElementById('baslik');
+  if (b && !az) {
+    b.innerHTML = b.innerHTML.replace(/(<i>.*?<\/i>|[^\s<]+)/g, function (m) {
+      return '<span class="kelime">' + m + '</span>';
+    });
+    [].forEach.call(b.querySelectorAll('.kelime'), function (k, i) {
+      setTimeout(function () { k.classList.add('gor'); }, 90 + i * 62);
+    });
+  }
+
+  /* Kaydirdikca gelen bolumler */
+  var hedefler = [].slice.call(document.querySelectorAll('[data-gel]'));
+  if (!az && 'IntersectionObserver' in window) {
+    var g = new IntersectionObserver(function (girisler) {
+      girisler.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('gor'); g.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+    hedefler.forEach(function (h) { g.observe(h); });
+  }
+  setTimeout(function () { hedefler.forEach(function (h) { h.classList.add('gor'); }); }, 2500);
+
+  /* Imlec isigi */
+  if (!az) {
+    window.addEventListener('pointermove', function (e) {
+      document.documentElement.style.setProperty('--mx', e.clientX + 'px');
+      document.documentElement.style.setProperty('--my', e.clientY + 'px');
+    }, { passive: true });
+  }
+
+  /* Ust cubuk cizgisi ve ekran goruntulerinde hafif paralaks */
+  var cubuk = document.getElementById('ust-cubuk');
+  var sahneler = [].slice.call(document.querySelectorAll('[data-parallaks]'));
+  var bekliyor = false;
+  function tazele() {
+    bekliyor = false;
+    if (cubuk) cubuk.classList.toggle('kaydi', window.scrollY > 12);
+    if (az) return;
+    var yuk = window.innerHeight;
+    sahneler.forEach(function (s) {
+      var r = s.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > yuk + 200) return;
+      var oran = (r.top + r.height / 2 - yuk / 2) / yuk;   // -1 .. 1
+      s.style.transform = 'translateY(' + (oran * -26).toFixed(1) + 'px)';
+    });
+  }
+  window.addEventListener('scroll', function () {
+    if (!bekliyor) { bekliyor = true; requestAnimationFrame(tazele); }
+  }, { passive: true });
+  tazele();
+
+  /* Form -> WhatsApp */
+  document.getElementById('frm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var metin = 'Merhaba, ben ' + document.getElementById('ad').value.trim() + '.\n'
+              + 'İşim: ' + document.getElementById('is').value.trim() + '\n\n'
+              + document.getElementById('msj').value.trim();
+    window.open('https://wa.me/905325146080?text=' + encodeURIComponent(metin), '_blank', 'noopener');
+  });
+})();
+</script>
+</body>
+</html>
